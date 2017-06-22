@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Super simple, lightweight parallax plugin.",
   "main": "dist/parallax.js",
-  "module": "src/parallax.esm.js",
+  "module": "dist/parallax.esm.js",
+  "browser": "dist/parallax.min.js",
   "license": "MIT",
   "author": {
     "name": "Cornelius Ukena",
