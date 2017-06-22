@@ -1,0 +1,31 @@
+{
+  "name": "xallarap",
+  "version": "0.1.0",
+  "description": "Super simple, lightweight parallax plugin.",
+  "main": "dist/parallax.js",
+  "module": "src/parallax.esm.js",
+  "license": "MIT",
+  "author": {
+    "name": "Cornelius Ukena",
+    "url": "https://twitter.com/_corneliusio"
+  },
+  "scripts": {
+    "lint": "eslint -c .eslintrc src/** --fix",
+    "buble": "buble -i src -o dist --no modules",
+    "rollup": "rollup dist/parallax.js --format umd --name 'xallarap' --output dist/parallax.js",
+    "uglify": "uglifyjs dist/parallax.js -o dist/parallax.min.js --compress --mangle",
+    "build": "yarpm run lint && rm -rf dist && yarpm run buble && yarpm run rollup && yarpm run uglify",
+    "watch": "nodemon --watch src --exec yarpm run build",
+    "prepublishOnly": "yarpm run build",
+    "precommit": "yarpm run lint"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "buble": "^0.15.2",
+    "eslint": "^4.0.0",
+    "nodemon": "^1.11.0",
+    "rollup": "^0.43.0",
+    "uglify-js": "^3.0.19",
+    "yarpm": "^0.2.1"
+  }
+}
