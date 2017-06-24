@@ -6,7 +6,8 @@ class ParallaxForeground extends Parallax {
 
         super();
 
-        let compensate = !!(el.dataset.parallaxCompensate || settings.compensate);
+        let compensate = !!(el.dataset.parallaxCompensate === '' || settings.compensate),
+            prev = 0;
 
         if (this.reduceMotion) {
             return;
@@ -31,15 +32,21 @@ class ParallaxForeground extends Parallax {
 
             this.animate();
 
-            if (compensate && this.top < this.wheight) {
+            if (compensate) {
 
-                if (!this.parallax) {
-                    this.measure();
-                }
+                setInterval(() => {
 
-                let relativeOrigin = ((this.wheight / 2) - this.anchor) / (this.height + this.wheight);
+                    if (this.top < this.wheight) {
+                        if (!this.parallax) {
+                            this.measure();
+                        }
 
-                this.compensation = Math.round(relativeOrigin * this.boundary);
+                        if (Math.abs(prev - this.anchor) > 1) {
+                            prev = this.anchor;
+                            this.compensation = Math.round(this.boundary * this.scrolled);
+                        }
+                    }
+                }, 128);
             }
         }
     }

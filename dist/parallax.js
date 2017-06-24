@@ -74,10 +74,13 @@ Parallax.prototype.isVisible = function isVisible () {
 
 var ParallaxForeground = (function (Parallax$$1) {
     function ParallaxForeground(el, settings) {
+        var this$1 = this;
+
 
         Parallax$$1.call(this);
 
-        var compensate = !!(el.dataset.parallaxCompensate || settings.compensate);
+        var compensate = !!(el.dataset.parallaxCompensate === '' || settings.compensate),
+            prev = 0;
 
         if (this.reduceMotion) {
             return;
@@ -102,15 +105,21 @@ var ParallaxForeground = (function (Parallax$$1) {
 
             this.animate();
 
-            if (compensate && this.top < this.wheight) {
+            if (compensate) {
 
-                if (!this.parallax) {
-                    this.measure();
-                }
+                setInterval(function () {
 
-                var relativeOrigin = ((this.wheight / 2) - this.anchor) / (this.height + this.wheight);
+                    if (this$1.top < this$1.wheight) {
+                        if (!this$1.parallax) {
+                            this$1.measure();
+                        }
 
-                this.compensation = Math.round(relativeOrigin * this.boundary);
+                        if (Math.abs(prev - this$1.anchor) > 1) {
+                            prev = this$1.anchor;
+                            this$1.compensation = Math.round(this$1.boundary * this$1.scrolled);
+                        }
+                    }
+                }, 128);
             }
         }
     }
@@ -253,6 +262,8 @@ var ParallaxBackground = (function (Parallax$$1) {
 
             this.img.addEventListener('load', function (event) {
                 this$1.css.backgroundImage = "url(" + (this$1.img.src) + ")";
+
+                delete this$1.img;
 
                 this$1.measure();
                 this$1.update();
