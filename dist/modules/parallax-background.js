@@ -57,6 +57,8 @@ var ParallaxBackground = (function (Parallax) {
             this.img.addEventListener('load', function (event) {
                 this$1.css.backgroundImage = "url(" + (this$1.img.src) + ")";
 
+                delete this$1.img;
+
                 this$1.measure();
                 this$1.update();
             });

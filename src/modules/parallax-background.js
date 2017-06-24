@@ -56,6 +56,8 @@ class ParallaxBackground extends Parallax {
             this.img.addEventListener('load', event => {
                 this.css.backgroundImage = `url(${this.img.src})`;
 
+                delete this.img;
+
                 this.measure();
                 this.update();
             });
