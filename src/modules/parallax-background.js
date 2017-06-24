@@ -84,6 +84,8 @@ class ParallaxBackground extends Parallax {
             ? Math.abs(this.boundary)
             : Math.round(this.boundary * (1 - this.height / this.wheight));
 
+        this.margin += 100;
+
         this.css.minHeight = `${this.wrap.offsetHeight + this.margin}px`;
 
         if (this.hack) {
