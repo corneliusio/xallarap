@@ -2,7 +2,7 @@
 export default class Parallax {
 
     constructor() {
-        this.compensation = 0;
+        this.compensate = false;
         this.hack = (!window.CSS || !CSS.supports || !CSS.supports('will-change', 'transform'));
         this.reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion)').matches;
     }
@@ -59,8 +59,10 @@ export default class Parallax {
         this.wmiddle = this.wtop + (this.wheight / 2);
         this.middle = this.top + (this.height / 2);
         this.anchor = this.origin();
-        this.scrolled = (this.wmiddle - this.anchor) / (this.height + this.wheight);
-        this.parallax = Math.round(this.boundary * this.scrolled) - this.compensation;
+        this.scrolled = this.compensate
+            ? (this.wtop / this.wheight)
+            : (this.wmiddle - this.anchor) / (this.height + this.wheight);
+        this.parallax = Math.round(this.boundary * this.scrolled);
     }
 
     isVisible() {

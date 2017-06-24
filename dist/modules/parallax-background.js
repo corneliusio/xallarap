@@ -24,8 +24,9 @@ var ParallaxBackground = (function (Parallax) {
 
         this.boundary = !isNaN(parseInt(this.wrap.dataset.parallaxAmount))
             ? parseInt(this.wrap.dataset.parallaxAmount)
-            : settings.amount || Math.ceil(innerHeight / 2);
-        this.include = 0;
+            : settings.amount || Math.round(innerHeight / 2);
+
+        this.include = Math.round(innerHeight / 2);
 
         if (!!this.boundary) {
 
@@ -86,14 +87,14 @@ var ParallaxBackground = (function (Parallax) {
 
         this.margin = (this.boundary < 0)
             ? Math.abs(this.boundary)
-            : Math.ceil(this.boundary * (1 - this.height / this.wheight));
+            : Math.round(this.boundary * (1 - this.height / this.wheight));
 
         this.css.minHeight = (this.wrap.offsetHeight + this.margin) + "px";
 
         if (this.hack) {
-            this.css.transform = "translate3d(0, " + (this.parallax - (this.margin / 2)) + "px, 0)";
+            this.css.transform = "translate3d(0, " + (Math.round(this.parallax - (this.margin / 2))) + "px, 0)";
         } else {
-            this.css.transform = "translateY(" + (this.parallax - (this.margin / 2)) + "px)";
+            this.css.transform = "translateY(" + (Math.round(this.parallax - (this.margin / 2))) + "px)";
         }
     };
 

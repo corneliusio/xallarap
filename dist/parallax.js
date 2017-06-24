@@ -5,7 +5,7 @@
 }(this, (function () { 'use strict';
 
 var Parallax = function Parallax() {
-    this.compensation = 0;
+    this.compensate = false;
     this.hack = (!window.CSS || !CSS.supports || !CSS.supports('will-change', 'transform'));
     this.reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion)').matches;
 };
@@ -64,8 +64,10 @@ Parallax.prototype.measure = function measure () {
     this.wmiddle = this.wtop + (this.wheight / 2);
     this.middle = this.top + (this.height / 2);
     this.anchor = this.origin();
-    this.scrolled = (this.wmiddle - this.anchor) / (this.height + this.wheight);
-    this.parallax = Math.round(this.boundary * this.scrolled) - this.compensation;
+    this.scrolled = this.compensate
+        ? (this.wtop / this.wheight)
+        : (this.wmiddle - this.anchor) / (this.height + this.wheight);
+    this.parallax = Math.round(this.boundary * this.scrolled);
 };
 
 Parallax.prototype.isVisible = function isVisible () {
@@ -74,21 +76,19 @@ Parallax.prototype.isVisible = function isVisible () {
 
 var ParallaxForeground = (function (Parallax$$1) {
     function ParallaxForeground(el, settings) {
-        var this$1 = this;
-
 
         Parallax$$1.call(this);
-
-        var compensate = !!(el.dataset.parallaxCompensate === '' || settings.compensate),
-            prev = 0;
 
         if (this.reduceMotion) {
             return;
         }
 
+        this.compensate = !!(el.dataset.parallaxCompensate === '' || settings.compensate);
+
         this.boundary = !isNaN(parseInt(el.dataset.parallaxAmount))
             ? parseInt(el.dataset.parallaxAmount)
             : settings.amount || 300;
+
         this.include = Math.abs(this.boundary);
 
         if (!!this.boundary) {
@@ -104,23 +104,6 @@ var ParallaxForeground = (function (Parallax$$1) {
             }
 
             this.animate();
-
-            if (compensate) {
-
-                setInterval(function () {
-
-                    if (this$1.top < this$1.wheight) {
-                        if (!this$1.parallax) {
-                            this$1.measure();
-                        }
-
-                        if (Math.abs(prev - this$1.anchor) > 1) {
-                            prev = this$1.anchor;
-                            this$1.compensation = Math.round(this$1.boundary * this$1.scrolled);
-                        }
-                    }
-                }, 128);
-            }
         }
     }
 
@@ -230,8 +213,9 @@ var ParallaxBackground = (function (Parallax$$1) {
 
         this.boundary = !isNaN(parseInt(this.wrap.dataset.parallaxAmount))
             ? parseInt(this.wrap.dataset.parallaxAmount)
-            : settings.amount || Math.ceil(innerHeight / 2);
-        this.include = 0;
+            : settings.amount || Math.round(innerHeight / 2);
+
+        this.include = Math.round(innerHeight / 2);
 
         if (!!this.boundary) {
 
@@ -292,14 +276,14 @@ var ParallaxBackground = (function (Parallax$$1) {
 
         this.margin = (this.boundary < 0)
             ? Math.abs(this.boundary)
-            : Math.ceil(this.boundary * (1 - this.height / this.wheight));
+            : Math.round(this.boundary * (1 - this.height / this.wheight));
 
         this.css.minHeight = (this.wrap.offsetHeight + this.margin) + "px";
 
         if (this.hack) {
-            this.css.transform = "translate3d(0, " + (this.parallax - (this.margin / 2)) + "px, 0)";
+            this.css.transform = "translate3d(0, " + (Math.round(this.parallax - (this.margin / 2))) + "px, 0)";
         } else {
-            this.css.transform = "translateY(" + (this.parallax - (this.margin / 2)) + "px)";
+            this.css.transform = "translateY(" + (Math.round(this.parallax - (this.margin / 2))) + "px)";
         }
     };
 

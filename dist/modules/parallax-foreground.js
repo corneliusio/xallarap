@@ -2,21 +2,19 @@ import Parallax from './parallax-abstract';
 
 var ParallaxForeground = (function (Parallax) {
     function ParallaxForeground(el, settings) {
-        var this$1 = this;
-
 
         Parallax.call(this);
-
-        var compensate = !!(el.dataset.parallaxCompensate === '' || settings.compensate),
-            prev = 0;
 
         if (this.reduceMotion) {
             return;
         }
 
+        this.compensate = !!(el.dataset.parallaxCompensate === '' || settings.compensate);
+
         this.boundary = !isNaN(parseInt(el.dataset.parallaxAmount))
             ? parseInt(el.dataset.parallaxAmount)
             : settings.amount || 300;
+
         this.include = Math.abs(this.boundary);
 
         if (!!this.boundary) {
@@ -32,23 +30,6 @@ var ParallaxForeground = (function (Parallax) {
             }
 
             this.animate();
-
-            if (compensate) {
-
-                setInterval(function () {
-
-                    if (this$1.top < this$1.wheight) {
-                        if (!this$1.parallax) {
-                            this$1.measure();
-                        }
-
-                        if (Math.abs(prev - this$1.anchor) > 1) {
-                            prev = this$1.anchor;
-                            this$1.compensation = Math.round(this$1.boundary * this$1.scrolled);
-                        }
-                    }
-                }, 128);
-            }
         }
     }
 
