@@ -1,11 +1,19 @@
 {
   "name": "xallarap",
   "version": "0.1.0",
-  "description": "Super simple, lightweight parallax plugin.",
+  "description": "Super simple, lightweight parallax.",
+  "keywords": [
+    "parallax",
+    "scrolling"
+  ],
   "main": "dist/parallax.js",
   "module": "dist/parallax.esm.js",
   "browser": "dist/parallax.min.js",
   "license": "MIT",
+  "repository": "corneliusio/xallarap",
+  "bugs": {
+    "url": "https://github.com/corneliusio/xallarap/issues"
+  },
   "author": {
     "name": "Cornelius Ukena",
     "url": "https://twitter.com/_corneliusio"
