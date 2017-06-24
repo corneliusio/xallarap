@@ -79,10 +79,10 @@ Then, you can simply load the script and initial it.
 
 ```html
 
-    <script src="https://unpkg.com/xallarap@0.1.0"></script>
-    
+    <script src="https://unpkg.com/xallarap"></script>
+
     <script>
-    
+
         // Using jQuery
         $(document).ready(function() {
             window.xallarap();
@@ -100,7 +100,7 @@ Then, you can simply load the script and initial it.
         });
 
     </script>
-    
+
 ```
 
 **That's it!**
@@ -135,7 +135,7 @@ Perhaps you have a banner on your page that is 100vh, and you want a little arro
             <span data-parallax data-parallax-amount="400">a</span>
             <span data-parallax data-parallax-amount="-350">x</span>
         </h1>
-        
+
         <div class="banner-arrow" data-parallax data-parallax-amount="800" data-parallax-compensate>&darr;</div> // Absolutely positioned center bottom of banner.
     </div>
 ```
