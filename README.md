@@ -23,28 +23,31 @@ import parallax from 'xallarap';
     }
 })(() => {
     parallax({
+
         foreground: {
-            el: document.querySelectorAll('[data-parallax]'),
+            el: '.parallax',
             compensate: false,
             amount: 300
         },
+
         background: {
-            el: document.querySelectorAll('[data-parallax-background]'), // Assign path to image to value of `data-parallax-background` in your HTML
+            el: '.parallax-background',
+            image: '/path/to/some/image.jpg',
             amount: Math.ceil(window.innerHeight / 2)
         }
+
     });
 });
 
 ```
 
-All options can be assigned (or overwritten) with the data attributes seen below.
+*All options can be assigned (or overwritten) with the data attributes seen below.*
 
 You can also use ES6 modules to take advantage or tree-shaking with [Webpack](https://webpack.js.org) or [Rollup](https://rollupjs.org).
 
 ```js
 
 import {background as parallax} from 'xallarap';
-
 
 (start => {
     if (document.readyState !== 'loading') {
@@ -53,17 +56,38 @@ import {background as parallax} from 'xallarap';
         document.addEventListener('DOMContentLoaded', start);
     }
 })(() => {
-    parallax();
+    parallax({
+        el: '.parallax-background',
+        image: '/path/to/some/image.jpg',
+        amount: Math.ceil(window.innerHeight / 2)
+    });
 });
 
 ```
 
+## Usage
 
-## The "Hello, world." Example
+### options.foreground.el
+Type: `array|string|node` Default: `[data-parallax]`
 
+### options.foreground.compensate `[data-parallax-compensate]`
+Type: `bool` Default `false`
+
+### options.foreground.amount `[data-parallax-amount]`
+Type: `int` Default: `300`
+
+### options.background.el
+Type: `array|string|node` Default: `[data-parallax-background]`
+
+### options.background.image `[data-parallax-background]`
+Type: `bool` Default `false`
+
+### options.background.amount `[data-parallax-amount]`
+Type: `int` Default: `Math.ceil(window.innerHeight / 2)`
+
+
+## Hello, World.
 You can use this method to just toss some parallax on a page quickly.
-
-There are two parallax components to this plugin, background and foreground. You can initialize a parallaxed background image with the `data-parallax-background` data attribute. For any elements in the foreground that you would like to apply a parallax effect to, simply apply the `data-parallax` attibute.
 
 ```html
 
@@ -79,6 +103,9 @@ Then, you can simply load the script and initial it.
 
 ```html
 
+    // If you use this method, specify the most recent version in
+    // as part of your request for quicker resolution.
+    // (e.g. https://unpkg.com/xallarap@0.1.2)
     <script src="https://unpkg.com/xallarap"></script>
 
     <script>
@@ -103,46 +130,7 @@ Then, you can simply load the script and initial it.
 
 ```
 
-**That's it!**
-
-### But wait, there's more.
-
-You can also define the parallax amount and direction via data attributes.
-
-```html
-
-    <div data-parallax-background="https://example.com/path/to/some/image.jpg" data-parallax-amount="200">
-        <h1>
-            <span data-parallax data-parallax-amount="-100">Hello, world.</span>
-        </h1>
-    </div>
-
-```
-
-By default, the plugin will use some percentage of the viewport height to determine the amount of parallax to apply, but you can set this manually by providing a number as the value of `data-parallax-amount`. This number can either be positive or negative depending on the direction you want the parallax to flow.
-
-Perhaps you have a banner on your page that is 100vh, and you want a little arrow at the bottom of the banner urging the user to scroll down. But you want to have that arrow slowly move away as the user scrolls. Here's where `data-parallax-compensate` will come in handy.
-
-```html
-    <div class="banner" data-parallax-background="/some/image.jpg"> // height: 100vh;
-        <h1> // Cool text vertically centered with CSS already. No need to adjust starting position of letters.
-            <span data-parallax data-parallax-amount="-200">P</span>
-            <span data-parallax data-parallax-amount="300">a</span>
-            <span data-parallax data-parallax-amount="-50">r</span>
-            <span data-parallax data-parallax-amount="200">a</span>
-            <span data-parallax data-parallax-amount="-200">l</span>
-            <span data-parallax data-parallax-amount="100">l</span>
-            <span data-parallax data-parallax-amount="400">a</span>
-            <span data-parallax data-parallax-amount="-350">x</span>
-        </h1>
-
-        <div class="banner-arrow" data-parallax data-parallax-amount="800" data-parallax-compensate>&darr;</div> // Absolutely positioned center bottom of banner.
-    </div>
-```
-
-A parallax amount of 800 will give the effect of having the arrow "run away" from the user as they scroll down. However, since it is below the center of the viewport, the parallax effect will actually pull it up instead of leaving it at the bottom like we want. Adding the `data-parallax-compensate` attibute will tell the plugin to not apply the parallax relative to the center of the viewport, but from wherever the element is relative to the viewport at initialization.
-
-This last point might be a little difficult to understand without simply trying it out.
+**You’re set!**
 
 ---
 
