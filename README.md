@@ -49,6 +49,7 @@ You can also use ES6 modules to take advantage or tree-shaking with [Webpack](ht
 
 import {background as parallax} from 'xallarap';
 
+
 (start => {
     if (document.readyState !== 'loading') {
         start();
@@ -65,26 +66,28 @@ import {background as parallax} from 'xallarap';
 
 ```
 
+
 ## Usage
 
-### options.foreground.el
-Type: `array|string|node` Default: `[data-parallax]`
+**options.foreground.el**
+Type: `string|array|node` Default: `[data-parallax]`
 
-### options.foreground.compensate `[data-parallax-compensate]`
+**options.foreground.compensate** `[data-parallax-compensate]`
 Type: `bool` Default `false`
 
-### options.foreground.amount `[data-parallax-amount]`
+**options.foreground.amount** `[data-parallax-amount]`
 Type: `int` Default: `300`
 
-### options.background.el
+**options.background.el**
 Type: `array|string|node` Default: `[data-parallax-background]`
 
-### options.background.image `[data-parallax-background]`
+**options.background.image** `[data-parallax-background]`
 Type: `bool` Default `false`
 
-### options.background.amount `[data-parallax-amount]`
+**options.background.amount** `[data-parallax-amount]`
 Type: `int` Default: `Math.ceil(window.innerHeight / 2)`
 
+---
 
 ## Hello, World.
 You can use this method to just toss some parallax on a page quickly.
