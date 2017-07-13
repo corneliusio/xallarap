@@ -8,7 +8,7 @@
   ],
   "main": "dist/parallax.js",
   "module": "dist/parallax.esm.js",
-  "browser": "dist/parallax.min.js",
+  "unpkg": "dist/parallax.min.js",
   "license": "MIT",
   "repository": "corneliusio/xallarap",
   "bugs": {
