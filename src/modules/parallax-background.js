@@ -84,6 +84,7 @@ class ParallaxBackground extends Parallax {
             let p = Math.round(this.parallax - (this.margin / 2));
 
             this.pparallax = this.parallax;
+
             this.hack
                 ? this.css.transform = `translate3d(0,${p}px,0)`
                 : this.css.transform = `translateY(${p}px)`;
