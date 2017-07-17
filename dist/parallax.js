@@ -6,6 +6,7 @@
 
 var Parallax = function Parallax() {
     this.compensate = false;
+    this.hack = (!window.CSS || !CSS.supports || !CSS.supports('will-change', 'transform'));
     this.reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion)').matches;
 };
 
@@ -109,8 +110,9 @@ var ParallaxForeground = (function (Parallax$$1) {
             this.el = el;
             this.css = this.el.style;
             this.css.display = 'inline-block';
+            this.css.transition = 'initial';
             this.css.willChange = 'transform';
-            this.css.transform = 'translateY(0)';
+            this.css.transform = this.hack ? 'translate3d(0,0,0)' : 'translateY(0)';
 
             this.animate();
         }
@@ -127,7 +129,9 @@ var ParallaxForeground = (function (Parallax$$1) {
     ParallaxForeground.prototype.update = function update () {
         if (this.parallax !== this.pparallax) {
             this.pparallax = this.parallax;
-            this.css.transform = "translateY(" + (this.parallax) + "px)";
+            this.hack
+                ? this.css.transform = "translate3d(0," + (this.parallax) + "px,0)"
+                : this.css.transform = "translateY(" + (this.parallax) + "px)";
         }
     };
 
@@ -238,9 +242,9 @@ var ParallaxBackground = (function (Parallax$$1) {
             this.css.zIndex = -1;
             this.css.backgroundSize = 'cover';
             this.css.backgroundPosition = 'center center';
-            this.css.transition = 'unset';
+            this.css.transition = 'initial';
             this.css.willChange = 'transform';
-            this.css.transform = 'translateY(0)';
+            this.css.transform = this.hack ? 'translate3d(0,0,0)' : 'translateY(0)';
 
             this.wrap.style.position = 'relative';
             this.wrap.style.zIndex = 2;
@@ -283,8 +287,12 @@ var ParallaxBackground = (function (Parallax$$1) {
         }
 
         if (this.parallax !== this.pparallax) {
+            var p = Math.round(this.parallax - (this.margin / 2));
+
             this.pparallax = this.parallax;
-            this.css.transform = "translateY(" + (Math.round(this.parallax - (this.margin / 2))) + "px)";
+            this.hack
+                ? this.css.transform = "translate3d(0," + p + "px,0)"
+                : this.css.transform = "translateY(" + p + "px)";
         }
     };
 

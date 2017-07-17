@@ -1,6 +1,7 @@
 
 var Parallax = function Parallax() {
     this.compensate = false;
+    this.hack = (!window.CSS || !CSS.supports || !CSS.supports('will-change', 'transform'));
     this.reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion)').matches;
 };
 
