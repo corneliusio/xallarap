@@ -1,7 +1,6 @@
 
 var Parallax = function Parallax() {
     this.compensate = false;
-    this.hack = (!window.CSS || !CSS.supports || !CSS.supports('will-change', 'transform'));
     this.reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion)').matches;
 };
 
@@ -24,10 +23,6 @@ Parallax.settings = function settings (options, defaultSelector) {
             break;
     }
 
-    if (isNaN(options.amount)) {
-
-    }
-
     return options;
 };
 
@@ -36,7 +31,8 @@ Parallax.prototype.animate = function animate () {
 
     this.monitor();
 
-    if (this.isVisible()) {
+    if (this.hasChanged() && this.isVisible()) {
+        this.unchange();
         this.measure();
         this.update();
     }
@@ -44,6 +40,20 @@ Parallax.prototype.animate = function animate () {
     requestAnimationFrame(function () {
         this$1.animate();
     });
+};
+
+Parallax.prototype.hasChanged = function hasChanged () {
+    return this.wtop !== this.pwtop
+        || this.wheight !== this.pwheight
+        || this.top !== this.ptop
+        || this.height !== this.pheight;
+};
+
+Parallax.prototype.unchange = function unchange () {
+    this.pwtop = this.wtop;
+    this.pwheight = this.wheight;
+    this.ptop = this.top;
+    this.pheight = this.height;
 };
 
 Parallax.prototype.monitor = function monitor () {
@@ -56,13 +66,17 @@ Parallax.prototype.monitor = function monitor () {
 };
 
 Parallax.prototype.measure = function measure () {
-    this.wmiddle = this.wtop + (this.wheight / 2);
-    this.middle = this.top + (this.height / 2);
-    this.anchor = this.origin();
-    this.scrolled = this.compensate
+
+    var scrolled = this.compensate
         ? (this.wtop / this.wheight)
-        : (this.wmiddle - this.anchor) / (this.height + this.wheight);
-    this.parallax = Math.round(this.boundary * this.scrolled);
+        : (this.wtop + (this.wheight / 2) - this.origin()) / (this.height + this.wheight);
+
+    this.middle = this.top + (this.height / 2);
+    this.margin = (this.boundary < 0)
+        ? Math.abs(this.boundary)
+        : Math.round(this.boundary * (1 - this.height / this.wheight));
+    this.margin += 100;
+    this.parallax = Math.round(this.boundary * scrolled);
 };
 
 Parallax.prototype.isVisible = function isVisible () {

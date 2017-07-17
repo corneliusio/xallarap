@@ -35,28 +35,23 @@ var ParallaxBackground = (function (Parallax) {
             this.img.src = src || settings.image || bg;
             this.css = this.el.style;
 
-            this.wrap.style.position = 'relative';
-            this.wrap.style.zIndex = 2;
-            this.wrap.style.overflow = 'hidden';
-
+            this.css.backgroundImage = "url(" + (this.img.src) + ")";
             this.css.position = this.img.style.position = 'absolute';
             this.css.top = this.css.left = this.css.right = this.css.bottom = 0;
             this.css.zIndex = -1;
             this.css.backgroundSize = 'cover';
             this.css.backgroundPosition = 'center center';
             this.css.transition = 'unset';
+            this.css.willChange = 'transform';
+            this.css.transform = 'translateY(0)';
 
-            if (this.hack) {
-                this.css.transform = 'translate3d(0, 0, 0)';
-            } else {
-                this.css.willChange = 'transform';
-                this.css.transform = 'translateY(0)';
-            }
+            this.wrap.style.position = 'relative';
+            this.wrap.style.zIndex = 2;
+            this.wrap.style.overflow = 'hidden';
 
             this.wrap.appendChild(this.el);
 
             this.img.addEventListener('load', function (event) {
-                this$1.css.backgroundImage = "url(" + (this$1.img.src) + ")";
 
                 delete this$1.img;
 
@@ -85,17 +80,13 @@ var ParallaxBackground = (function (Parallax) {
 
     ParallaxBackground.prototype.update = function update () {
 
-        this.margin = (this.boundary < 0)
-            ? Math.abs(this.boundary)
-            : Math.round(this.boundary * (1 - this.height / this.wheight));
+        if (this.margin !== this.pmargin) {
+            this.css.minHeight = (this.wrap.offsetHeight + this.margin) + "px";
+            this.pmargin = this.margin;
+        }
 
-        this.margin += 100;
-
-        this.css.minHeight = (this.wrap.offsetHeight + this.margin) + "px";
-
-        if (this.hack) {
-            this.css.transform = "translate3d(0, " + (Math.round(this.parallax - (this.margin / 2))) + "px, 0)";
-        } else {
+        if (this.parallax !== this.pparallax) {
+            this.pparallax = this.parallax;
             this.css.transform = "translateY(" + (Math.round(this.parallax - (this.margin / 2))) + "px)";
         }
     };

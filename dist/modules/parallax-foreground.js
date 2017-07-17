@@ -21,13 +21,8 @@ var ParallaxForeground = (function (Parallax) {
             this.el = el;
             this.css = this.el.style;
             this.css.display = 'inline-block';
-
-            if (this.hack) {
-                this.css.transform = 'translate3d(0, 0, 0)';
-            } else {
-                this.css.willChange = 'transform';
-                this.css.transform = 'translateY(0)';
-            }
+            this.css.willChange = 'transform';
+            this.css.transform = 'translateY(0)';
 
             this.animate();
         }
@@ -42,9 +37,8 @@ var ParallaxForeground = (function (Parallax) {
     };
 
     ParallaxForeground.prototype.update = function update () {
-        if (this.hack) {
-            this.css.transform = "translate3d(0, " + (this.parallax) + "px, 0)";
-        } else {
+        if (this.parallax !== this.pparallax) {
+            this.pparallax = this.parallax;
             this.css.transform = "translateY(" + (this.parallax) + "px)";
         }
     };
