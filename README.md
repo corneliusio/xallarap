@@ -2,7 +2,7 @@
 
 Super simple, lightweight parallax.
 
-[![Github file size](https://img.shields.io/github/size/corneliusio/xallarap/dist/parallax.min.js.svg?style=flat-square)]() [![license](https://img.shields.io/github/license/corneliusio/xallarap.svg?style=flat-square)](https://github.com/corneliusio/xallarap/blob/master/LICENSE)
+[![Github file size](https://img.shields.io/github/size/corneliusio/xallarap/dist/parallax.min.js.svg?style=flat-square)]() [![gzip file size](http://img.badgesize.io/https://unpkg.com/xallarap?compression=gzip&label=gzip&style=flat-square)]() [![license](https://img.shields.io/github/license/corneliusio/xallarap.svg?style=flat-square)](https://github.com/corneliusio/xallarap/blob/master/LICENSE)
 
 ---
 
