@@ -52,15 +52,15 @@ class ParallaxBackground extends Parallax {
 
             this.wrap.appendChild(this.el);
 
-            this.img.addEventListener('load', event => {
+            this.img.addEventListener('load', () => {
 
-                delete this.img;
+                this.img = null;
 
                 this.measure();
                 this.update();
             });
 
-            window.addEventListener('resize', event => {
+            window.addEventListener('resize', () => {
                 debounce(() => {
                     this.measure();
                     this.update();

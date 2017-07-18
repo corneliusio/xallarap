@@ -57,15 +57,15 @@ var ParallaxBackground = (function (Parallax) {
 
             this.wrap.appendChild(this.el);
 
-            this.img.addEventListener('load', function (event) {
+            this.img.addEventListener('load', function () {
 
-                delete this$1.img;
+                this$1.img = null;
 
                 this$1.measure();
                 this$1.update();
             });
 
-            window.addEventListener('resize', function (event) {
+            window.addEventListener('resize', function () {
                 debounce(function () {
                     this$1.measure();
                     this$1.update();
