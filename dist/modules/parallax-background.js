@@ -3,12 +3,18 @@ import debounce from '../util/debounce';
 
 var ParallaxBackground = (function (Parallax) {
     function ParallaxBackground(container, settings) {
+        Parallax.call(this);
+        this.wrap = container;
+        this.init(settings);
+    }
+
+    if ( Parallax ) ParallaxBackground.__proto__ = Parallax;
+    ParallaxBackground.prototype = Object.create( Parallax && Parallax.prototype );
+    ParallaxBackground.prototype.constructor = ParallaxBackground;
+
+    ParallaxBackground.prototype.init = function init (settings) {
         var this$1 = this;
 
-
-        Parallax.call(this);
-
-        this.wrap = container;
 
         var src = (this.wrap.dataset.parallaxBackground || this.wrap.dataset.parallaxBg),
             bg = getComputedStyle(this.wrap).backgroundImage.replace(/url\("?([^)"]+)"?\)/, '$1');
@@ -68,11 +74,7 @@ var ParallaxBackground = (function (Parallax) {
 
             this.animate();
         }
-    }
-
-    if ( Parallax ) ParallaxBackground.__proto__ = Parallax;
-    ParallaxBackground.prototype = Object.create( Parallax && Parallax.prototype );
-    ParallaxBackground.prototype.constructor = ParallaxBackground;
+    };
 
     ParallaxBackground.prototype.origin = function origin () {
         return this.middle;

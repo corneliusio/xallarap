@@ -3,23 +3,26 @@ import Parallax from './parallax-abstract';
 class ParallaxForeground extends Parallax {
 
     constructor(el, settings) {
-
         super();
+        this.el = el;
+        this.init();
+    }
+
+    init(settings) {
 
         if (this.reduceMotion) {
             return;
         }
 
-        this.compensate = !!(el.dataset.parallaxCompensate === '' || settings.compensate);
+        this.compensate = !!(this.el.dataset.parallaxCompensate === '' || settings.compensate);
 
-        this.boundary = !isNaN(parseInt(el.dataset.parallaxAmount))
-            ? parseInt(el.dataset.parallaxAmount)
+        this.boundary = !isNaN(parseInt(this.el.dataset.parallaxAmount))
+            ? parseInt(this.el.dataset.parallaxAmount)
             : settings.amount || 300;
 
         this.include = Math.abs(this.boundary);
 
         if (!!this.boundary) {
-            this.el = el;
             this.css = this.el.style;
             this.css.display = 'inline-block';
             this.css.transition = 'initial';

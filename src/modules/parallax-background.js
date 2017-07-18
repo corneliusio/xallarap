@@ -4,10 +4,12 @@ import debounce from '../util/debounce';
 class ParallaxBackground extends Parallax {
 
     constructor(container, settings) {
-
         super();
-
         this.wrap = container;
+        this.init(settings);
+    }
+
+    init(settings) {
 
         let src = (this.wrap.dataset.parallaxBackground || this.wrap.dataset.parallaxBg),
             bg = getComputedStyle(this.wrap).backgroundImage.replace(/url\("?([^)"]+)"?\)/, '$1');

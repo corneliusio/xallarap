@@ -91,23 +91,30 @@ Parallax.prototype.isVisible = function isVisible () {
 
 var ParallaxForeground = (function (Parallax$$1) {
     function ParallaxForeground(el, settings) {
-
         Parallax$$1.call(this);
+        this.el = el;
+        this.init();
+    }
+
+    if ( Parallax$$1 ) ParallaxForeground.__proto__ = Parallax$$1;
+    ParallaxForeground.prototype = Object.create( Parallax$$1 && Parallax$$1.prototype );
+    ParallaxForeground.prototype.constructor = ParallaxForeground;
+
+    ParallaxForeground.prototype.init = function init (settings) {
 
         if (this.reduceMotion) {
             return;
         }
 
-        this.compensate = !!(el.dataset.parallaxCompensate === '' || settings.compensate);
+        this.compensate = !!(this.el.dataset.parallaxCompensate === '' || settings.compensate);
 
-        this.boundary = !isNaN(parseInt(el.dataset.parallaxAmount))
-            ? parseInt(el.dataset.parallaxAmount)
+        this.boundary = !isNaN(parseInt(this.el.dataset.parallaxAmount))
+            ? parseInt(this.el.dataset.parallaxAmount)
             : settings.amount || 300;
 
         this.include = Math.abs(this.boundary);
 
         if (!!this.boundary) {
-            this.el = el;
             this.css = this.el.style;
             this.css.display = 'inline-block';
             this.css.transition = 'initial';
@@ -116,11 +123,7 @@ var ParallaxForeground = (function (Parallax$$1) {
 
             this.animate();
         }
-    }
-
-    if ( Parallax$$1 ) ParallaxForeground.__proto__ = Parallax$$1;
-    ParallaxForeground.prototype = Object.create( Parallax$$1 && Parallax$$1.prototype );
-    ParallaxForeground.prototype.constructor = ParallaxForeground;
+    };
 
     ParallaxForeground.prototype.origin = function origin () {
         return this.middle - (this.parallax || 0);
@@ -204,12 +207,18 @@ var debounce = function (func, wait) {
 
 var ParallaxBackground = (function (Parallax$$1) {
     function ParallaxBackground(container, settings) {
+        Parallax$$1.call(this);
+        this.wrap = container;
+        this.init(settings);
+    }
+
+    if ( Parallax$$1 ) ParallaxBackground.__proto__ = Parallax$$1;
+    ParallaxBackground.prototype = Object.create( Parallax$$1 && Parallax$$1.prototype );
+    ParallaxBackground.prototype.constructor = ParallaxBackground;
+
+    ParallaxBackground.prototype.init = function init (settings) {
         var this$1 = this;
 
-
-        Parallax$$1.call(this);
-
-        this.wrap = container;
 
         var src = (this.wrap.dataset.parallaxBackground || this.wrap.dataset.parallaxBg),
             bg = getComputedStyle(this.wrap).backgroundImage.replace(/url\("?([^)"]+)"?\)/, '$1');
@@ -269,11 +278,7 @@ var ParallaxBackground = (function (Parallax$$1) {
 
             this.animate();
         }
-    }
-
-    if ( Parallax$$1 ) ParallaxBackground.__proto__ = Parallax$$1;
-    ParallaxBackground.prototype = Object.create( Parallax$$1 && Parallax$$1.prototype );
-    ParallaxBackground.prototype.constructor = ParallaxBackground;
+    };
 
     ParallaxBackground.prototype.origin = function origin () {
         return this.middle;
