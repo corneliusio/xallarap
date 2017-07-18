@@ -5,7 +5,7 @@ class ParallaxForeground extends Parallax {
     constructor(el, settings) {
         super();
         this.el = el;
-        this.init();
+        this.init(settings);
     }
 
     init(settings) {

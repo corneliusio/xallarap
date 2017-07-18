@@ -4,7 +4,7 @@ var ParallaxForeground = (function (Parallax) {
     function ParallaxForeground(el, settings) {
         Parallax.call(this);
         this.el = el;
-        this.init();
+        this.init(settings);
     }
 
     if ( Parallax ) ParallaxForeground.__proto__ = Parallax;

@@ -93,7 +93,7 @@ var ParallaxForeground = (function (Parallax$$1) {
     function ParallaxForeground(el, settings) {
         Parallax$$1.call(this);
         this.el = el;
-        this.init();
+        this.init(settings);
     }
 
     if ( Parallax$$1 ) ParallaxForeground.__proto__ = Parallax$$1;
