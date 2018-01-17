@@ -29,6 +29,14 @@ Parallax.settings = function settings (options, defaultSelector) {
             break;
     }
 
+    if (NodeList.prototype.isPrototypeOf(options.el)) {
+        options.el = Array.from(options.el);
+    }
+
+    if (!Array.isArray(options.el)) {
+        options.el = [options.el];
+    }
+
     return options;
 };
 
