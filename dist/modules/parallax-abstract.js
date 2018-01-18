@@ -85,7 +85,7 @@ Parallax.prototype.measure = function measure () {
         ? Math.abs(this.boundary)
         : Math.round(this.boundary * (1 - this.height / this.wheight));
     this.margin += 100;
-    this.parallax = Math.round(this.boundary * scrolled);
+    this.parallax = parseFloat((this.boundary * scrolled).toFixed(1));
 };
 
 Parallax.prototype.isVisible = function isVisible () {

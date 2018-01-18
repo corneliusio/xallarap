@@ -83,7 +83,7 @@ class ParallaxBackground extends Parallax {
         }
 
         if (this.parallax !== this.pparallax) {
-            let p = Math.round(this.parallax - (this.margin / 2));
+            let p = parseFloat((this.parallax - (this.margin / 2)).toFixed(1));
 
             this.pparallax = this.parallax;
 

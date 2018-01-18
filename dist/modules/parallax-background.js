@@ -88,7 +88,7 @@ var ParallaxBackground = (function (Parallax) {
         }
 
         if (this.parallax !== this.pparallax) {
-            var p = Math.round(this.parallax - (this.margin / 2));
+            var p = parseFloat((this.parallax - (this.margin / 2)).toFixed(1));
 
             this.pparallax = this.parallax;
 

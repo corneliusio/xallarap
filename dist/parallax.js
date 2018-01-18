@@ -90,7 +90,7 @@ Parallax.prototype.measure = function measure () {
         ? Math.abs(this.boundary)
         : Math.round(this.boundary * (1 - this.height / this.wheight));
     this.margin += 100;
-    this.parallax = Math.round(this.boundary * scrolled);
+    this.parallax = parseFloat((this.boundary * scrolled).toFixed(1));
 };
 
 Parallax.prototype.isVisible = function isVisible () {
@@ -300,7 +300,7 @@ var ParallaxBackground = (function (Parallax$$1) {
         }
 
         if (this.parallax !== this.pparallax) {
-            var p = Math.round(this.parallax - (this.margin / 2));
+            var p = parseFloat((this.parallax - (this.margin / 2)).toFixed(1));
 
             this.pparallax = this.parallax;
 
