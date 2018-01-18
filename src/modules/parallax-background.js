@@ -27,7 +27,7 @@ class ParallaxBackground extends Parallax {
             ? parseInt(this.wrap.dataset.parallaxAmount)
             : settings.amount || Math.round(innerHeight / 2);
 
-        this.include = Math.round(innerHeight / 2);
+        this.include = Math.round(innerHeight / 5);
 
         if (!!this.boundary) {
 
@@ -78,7 +78,13 @@ class ParallaxBackground extends Parallax {
     update() {
 
         if (this.margin !== this.pmargin) {
-            this.css.minHeight = `${this.wrap.offsetHeight + this.margin}px`;
+            let currentMinHeight = parseInt(this.css.minHeight),
+                potentialMinHeight = this.wrap.offsetHeight + this.margin;
+
+            if (isNaN(currentMinHeight) || Math.abs(currentMinHeight - potentialMinHeight) > 5) {
+                this.css.minHeight = `${potentialMinHeight}px`;
+            }
+
             this.pmargin = this.margin;
         }
 

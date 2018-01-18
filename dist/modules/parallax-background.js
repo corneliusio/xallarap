@@ -32,7 +32,7 @@ var ParallaxBackground = (function (Parallax) {
             ? parseInt(this.wrap.dataset.parallaxAmount)
             : settings.amount || Math.round(innerHeight / 2);
 
-        this.include = Math.round(innerHeight / 2);
+        this.include = Math.round(innerHeight / 5);
 
         if (!!this.boundary) {
 
@@ -83,7 +83,13 @@ var ParallaxBackground = (function (Parallax) {
     ParallaxBackground.prototype.update = function update () {
 
         if (this.margin !== this.pmargin) {
-            this.css.minHeight = (this.wrap.offsetHeight + this.margin) + "px";
+            var currentMinHeight = parseInt(this.css.minHeight),
+                potentialMinHeight = this.wrap.offsetHeight + this.margin;
+
+            if (isNaN(currentMinHeight) || Math.abs(currentMinHeight - potentialMinHeight) > 5) {
+                this.css.minHeight = potentialMinHeight + "px";
+            }
+
             this.pmargin = this.margin;
         }
 

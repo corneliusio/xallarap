@@ -59,8 +59,10 @@ Parallax.prototype.animate = function animate () {
 Parallax.prototype.hasChanged = function hasChanged () {
     return this.wtop !== this.pwtop
         || this.wheight !== this.pwheight
-        || this.top !== this.ptop
-        || this.height !== this.pheight;
+        || this.top > (this.ptop + 1)
+        || this.top < (this.ptop - 1)
+        || this.height > (this.pheight + 1)
+        || this.height < (this.pheight - 1);
 };
 
 Parallax.prototype.unchange = function unchange () {
@@ -89,7 +91,7 @@ Parallax.prototype.measure = function measure () {
     this.margin = (this.boundary < 0)
         ? Math.abs(this.boundary)
         : Math.round(this.boundary * (1 - this.height / this.wheight));
-    this.margin += 100;
+    this.margin += 50;
     this.parallax = parseFloat((this.boundary * scrolled).toFixed(1));
 };
 
@@ -244,7 +246,7 @@ var ParallaxBackground = (function (Parallax$$1) {
             ? parseInt(this.wrap.dataset.parallaxAmount)
             : settings.amount || Math.round(innerHeight / 2);
 
-        this.include = Math.round(innerHeight / 2);
+        this.include = Math.round(innerHeight / 5);
 
         if (!!this.boundary) {
 
@@ -295,7 +297,13 @@ var ParallaxBackground = (function (Parallax$$1) {
     ParallaxBackground.prototype.update = function update () {
 
         if (this.margin !== this.pmargin) {
-            this.css.minHeight = (this.wrap.offsetHeight + this.margin) + "px";
+            var currentMinHeight = parseInt(this.css.minHeight),
+                potentialMinHeight = this.wrap.offsetHeight + this.margin;
+
+            if (isNaN(currentMinHeight) || Math.abs(currentMinHeight - potentialMinHeight) > 5) {
+                this.css.minHeight = potentialMinHeight + "px";
+            }
+
             this.pmargin = this.margin;
         }
 

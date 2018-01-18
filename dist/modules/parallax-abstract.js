@@ -54,8 +54,10 @@ Parallax.prototype.animate = function animate () {
 Parallax.prototype.hasChanged = function hasChanged () {
     return this.wtop !== this.pwtop
         || this.wheight !== this.pwheight
-        || this.top !== this.ptop
-        || this.height !== this.pheight;
+        || this.top > (this.ptop + 1)
+        || this.top < (this.ptop - 1)
+        || this.height > (this.pheight + 1)
+        || this.height < (this.pheight - 1);
 };
 
 Parallax.prototype.unchange = function unchange () {
@@ -84,7 +86,7 @@ Parallax.prototype.measure = function measure () {
     this.margin = (this.boundary < 0)
         ? Math.abs(this.boundary)
         : Math.round(this.boundary * (1 - this.height / this.wheight));
-    this.margin += 100;
+    this.margin += 50;
     this.parallax = parseFloat((this.boundary * scrolled).toFixed(1));
 };
 
