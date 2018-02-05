@@ -27,8 +27,6 @@ class ParallaxBackground extends Parallax {
             ? parseInt(this.wrap.dataset.parallaxAmount)
             : settings.amount || Math.round(innerHeight / 2);
 
-        this.include = Math.round(innerHeight / 5);
-
         if (!!this.boundary) {
 
             this.el = document.createElement('div');

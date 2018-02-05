@@ -23,8 +23,6 @@ var ParallaxForeground = (function (Parallax) {
             ? parseInt(this.el.dataset.parallaxAmount)
             : settings.amount || 300;
 
-        this.include = Math.abs(this.boundary);
-
         if (!!this.boundary) {
             this.css = this.el.style;
             this.css.display = 'inline-block';

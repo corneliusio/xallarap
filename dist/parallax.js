@@ -6,6 +6,7 @@
 
 var Parallax = function Parallax() {
     this.compensate = false;
+    this.include = innerHeight;
     this.hack = (!window.CSS || !CSS.supports || !CSS.supports('will-change', 'transform'));
     this.reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion)').matches;
 };
@@ -121,8 +122,6 @@ var ParallaxForeground = (function (Parallax$$1) {
         this.boundary = !isNaN(parseInt(this.el.dataset.parallaxAmount))
             ? parseInt(this.el.dataset.parallaxAmount)
             : settings.amount || 300;
-
-        this.include = Math.abs(this.boundary);
 
         if (!!this.boundary) {
             this.css = this.el.style;
@@ -245,8 +244,6 @@ var ParallaxBackground = (function (Parallax$$1) {
         this.boundary = !isNaN(parseInt(this.wrap.dataset.parallaxAmount))
             ? parseInt(this.wrap.dataset.parallaxAmount)
             : settings.amount || Math.round(innerHeight / 2);
-
-        this.include = Math.round(innerHeight / 5);
 
         if (!!this.boundary) {
 
