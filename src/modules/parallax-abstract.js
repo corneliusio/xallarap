@@ -91,7 +91,7 @@ export default class Parallax {
         this.parallax = parseFloat((this.boundary * scrolled).toFixed(1));
 
         if (this.css.setProperty) {
-            this.css.setProperty('--parallax-control', scrolled);
+            this.css.setProperty('--parallax-control', parseFloat(scrolled).toFixed(2));
         }
     }
 
