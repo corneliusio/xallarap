@@ -94,6 +94,10 @@ Parallax.prototype.measure = function measure () {
         : Math.round(this.boundary * (1 - this.height / this.wheight));
     this.margin += 50;
     this.parallax = parseFloat((this.boundary * scrolled).toFixed(1));
+
+    if (this.css.setProperty) {
+        this.css.setProperty('--parallax-control', scrolled);
+    }
 };
 
 Parallax.prototype.isVisible = function isVisible () {
