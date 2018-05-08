@@ -3,8 +3,8 @@
 Super simple, lightweight parallax.
 
 [![NPM version](https://img.shields.io/npm/v/xallarap.svg?style=flat-square)](http://npmjs.com/package/xallarap)
-[![Github file size](https://img.shields.io/github/size/corneliusio/xallarap/dist/xallarap.min.js.svg?style=flat-square)]()
-[![gzip file size](http://img.badgesize.io/https://unpkg.com/xallarap/dist/xallarap.min.js?compression=gzip&label=gzip&style=flat-square)]()
+![Github file size](https://img.shields.io/github/size/corneliusio/xallarap/dist/xallarap.min.js.svg?style=flat-square)
+![gzip file size](https://img.badgesize.io/https://unpkg.com/xallarap/dist/xallarap.min.js?compression=gzip&label=gzip&style=flat-square)
 [![license](https://img.shields.io/github/license/corneliusio/xallarap.svg?style=flat-square)](https://github.com/corneliusio/xallarap/blob/master/LICENSE)
 
 ---
@@ -16,7 +16,8 @@ Super simple, lightweight parallax.
 | 60+    | 14+  | 53+     | 10+          | 11+        | 6+      |
 
 **Note: This package does not support IE anymore.  
-If you're looking for IE11 support, you can install `xallarap@^0.2.8`**
+If you're looking for IE11 support, you can install `xallarap@^0.2.8`  
+or make sure you're compiling down to ES5 with something like [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env)**
 
 ---
 
