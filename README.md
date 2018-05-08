@@ -83,19 +83,19 @@ import {background as parallax} from 'xallarap';
 ### options.foreground.el  
 Type: `string|array|node` Default: `[data-parallax]`
 
-### options.foreground.compensate `[data-parallax-compensate]`  
+### options.foreground.compensate <small>`[data-parallax-compensate]`</small>  
 Type: `bool` Default `false`
 
-### options.foreground.amount `[data-parallax-amount]`  
+### options.foreground.amount <small>`[data-parallax-amount]`</small>  
 Type: `int` Default: `300`
 
 ### options.background.el  
 Type: `array|string|node` Default: `[data-parallax-background]`
 
-### options.background.image `[data-parallax-background]`  
+### options.background.image <small>`[data-parallax-background]`</small>  
 Type: `bool` Default `false`
 
-### options.background.amount `[data-parallax-amount]`  
+### options.background.amount <small>`[data-parallax-amount]`</small>  
 Type: `int` Default: `Math.ceil(window.innerHeight / 2)`
 
 ---
