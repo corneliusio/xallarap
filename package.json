@@ -37,6 +37,6 @@
     "eslint-plugin-html": "^4.0.3",
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^4.0.0-beta.4",
-    "rollup-plugin-uglify": "^3.0.0"
+    "rollup-plugin-terser": "^3.0.0"
   }
 }
