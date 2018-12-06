@@ -4,7 +4,7 @@ module.exports = {
     input: 'src/index.es.js',
     output: {
         file: 'dist/xallarap.js',
-        format: 'es'
+        format: 'esm'
     },
     plugins: [
         babel({

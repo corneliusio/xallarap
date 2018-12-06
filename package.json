@@ -32,10 +32,10 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta",
     "@babel/preset-env": "^7.0.0-beta",
-    "babel-eslint": "^8.2.3",
-    "eslint": "^4.19.1",
-    "eslint-plugin-html": "^4.0.3",
-    "rollup": "^0.58.2",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.9.0",
+    "eslint-plugin-html": "^5.0.0",
+    "rollup": "^0.67.4",
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-terser": "^3.0.0"
   }

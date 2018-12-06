@@ -13,17 +13,17 @@ export default class Parallax {
         const dom = query => document.querySelectorAll(query);
 
         switch (typeof options.el) {
-        case 'string' :
-            options.el = dom(options.el);
-            break;
+            case 'string' :
+                options.el = dom(options.el);
+                break;
 
-        case 'object' :
-            options.el = options.el;
-            break;
+            case 'object' :
+                options.el = options.el;
+                break;
 
-        default :
-            options.el = dom(defaultSelector);
-            break;
+            default :
+                options.el = dom(defaultSelector);
+                break;
         }
 
         if (NodeList.prototype.isPrototypeOf(options.el)) {

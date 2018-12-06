@@ -7,7 +7,7 @@ class Parallax {
   }
 
   static settings(options, defaultSelector) {
-    const dom = query => document.querySelectorAll(query);
+    var dom = query => document.querySelectorAll(query);
 
     switch (typeof options.el) {
       case 'string':
@@ -69,7 +69,7 @@ class Parallax {
   }
 
   measure() {
-    let scrolled = this.compensate ? this.wtop / this.wheight : (this.wtop + this.wheight / 2 - this.origin()) / (this.height + this.wheight);
+    var scrolled = this.compensate ? this.wtop / this.wheight : (this.wtop + this.wheight / 2 - this.origin()) / (this.height + this.wheight);
     this.middle = this.top + this.height / 2;
     this.margin = this.boundary < 0 ? Math.abs(this.boundary) : Math.round(this.boundary * (1 - this.height / this.wheight));
     this.margin += 50;
@@ -124,16 +124,17 @@ class ParallaxForeground extends Parallax {
 
 }
 
-var foreground = ((options = {}) => {
-  const settings = Parallax.settings(options, '[data-parallax]');
+var foreground = (function () {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var settings = Parallax.settings(options, '[data-parallax]');
 
-  for (let i = 0; i < settings.el.length; ++i) {
+  for (var i = 0; i < settings.el.length; ++i) {
     new ParallaxForeground(settings.el[i], settings);
   }
 });
 
 var hash = (input => {
-  let str = input.toString(),
+  var str = input.toString(),
       len = str.length,
       hash = 0,
       chr;
@@ -142,7 +143,7 @@ var hash = (input => {
     return hash;
   }
 
-  for (let i = 0; i < len; i++) {
+  for (var i = 0; i < len; i++) {
     chr = str.charCodeAt(i);
     hash = (hash << 5) - hash + chr;
     hash |= 0;
@@ -151,18 +152,26 @@ var hash = (input => {
   return Math.abs(hash).toString();
 });
 
-const timeouts = [];
-var debounce = ((func, wait, ...args) => {
-  let key = hash(func),
-      bounce = (...pass) => {
+var timeouts = [];
+var debounce = (function (func, wait) {
+  var key = hash(func),
+      bounce = function bounce() {
     clearTimeout(timeouts[key]);
     delete timeouts[key];
-    func(...pass);
+    func(...arguments);
   },
-      queue = (...pass) => {
+      queue = function queue() {
+    for (var _len2 = arguments.length, pass = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      pass[_key2] = arguments[_key2];
+    }
+
     clearTimeout(timeouts[key]);
     timeouts[key] = setTimeout(() => bounce(...pass), wait);
   };
+
+  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    args[_key - 2] = arguments[_key];
+  }
 
   if (args.length === 1 && args[0] === 'prepare') {
     return queue;
@@ -179,7 +188,7 @@ class ParallaxBackground extends Parallax {
   }
 
   init(settings) {
-    let src = this.wrap.dataset.parallaxBackground || this.wrap.dataset.parallaxBg,
+    var src = this.wrap.dataset.parallaxBackground || this.wrap.dataset.parallaxBg,
         bg = getComputedStyle(this.wrap).backgroundImage.replace(/url\("?([^)"]+)"?\)/, '$1');
 
     if (this.reduceMotion) {
@@ -231,7 +240,7 @@ class ParallaxBackground extends Parallax {
 
   update() {
     if (this.margin !== this.pmargin) {
-      let currentMinHeight = parseInt(this.css.minHeight),
+      var currentMinHeight = parseInt(this.css.minHeight),
           potentialMinHeight = this.wrap.offsetHeight + this.margin;
 
       if (isNaN(currentMinHeight) || Math.abs(currentMinHeight - potentialMinHeight) > 5) {
@@ -242,7 +251,7 @@ class ParallaxBackground extends Parallax {
     }
 
     if (this.parallax !== this.pparallax) {
-      let p = parseFloat((this.parallax - this.margin / 2).toFixed(1));
+      var p = parseFloat((this.parallax - this.margin / 2).toFixed(1));
       this.pparallax = this.parallax;
       this.hack ? this.css.transform = `translate3d(0,${p}px,0)` : this.css.transform = `translateY(${p}px)`;
     }
@@ -250,15 +259,17 @@ class ParallaxBackground extends Parallax {
 
 }
 
-var background = ((options = {}) => {
-  const settings = Parallax.settings(options, '[data-parallax-background],[data-parallax-bg]');
+var background = (function () {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var settings = Parallax.settings(options, '[data-parallax-background],[data-parallax-bg]');
 
-  for (let i = 0; i < settings.el.length; ++i) {
+  for (var i = 0; i < settings.el.length; ++i) {
     new ParallaxBackground(settings.el[i], settings);
   }
 });
 
-var index_es = ((options = {}) => {
+var index_es = (function () {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   foreground(options.foreground);
   background(options.background);
 });
