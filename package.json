@@ -8,8 +8,8 @@
     "lightweight"
   ],
   "side-effects": false,
-  "main": "dist/parallax.js",
-  "unpkg": "dist/parallax.min.js",
+  "main": "dist/xallarap.js",
+  "unpkg": "dist/xallarap.min.js",
   "license": "MIT",
   "repository": "corneliusio/xallarap",
   "bugs": {
