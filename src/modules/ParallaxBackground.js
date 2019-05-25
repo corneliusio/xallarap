@@ -1,4 +1,4 @@
-import Parallax from './parallax-abstract';
+import Parallax from './Parallax';
 import debounce from '../util/debounce';
 
 class ParallaxBackground extends Parallax {

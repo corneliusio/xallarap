@@ -1,4 +1,4 @@
-import Parallax from './parallax-abstract';
+import Parallax from './Parallax';
 
 class ParallaxForeground extends Parallax {
     constructor(el, settings) {
