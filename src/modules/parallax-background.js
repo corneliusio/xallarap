@@ -2,7 +2,6 @@ import Parallax from './parallax-abstract';
 import debounce from '../util/debounce';
 
 class ParallaxBackground extends Parallax {
-
     constructor(container, settings) {
         super();
         this.wrap = container;
@@ -10,7 +9,6 @@ class ParallaxBackground extends Parallax {
     }
 
     init(settings) {
-
         let src = (this.wrap.dataset.parallaxBackground || this.wrap.dataset.parallaxBg),
             bg = getComputedStyle(this.wrap).backgroundImage.replace(/url\("?([^)"]+)"?\)/, '$1');
 
@@ -28,7 +26,6 @@ class ParallaxBackground extends Parallax {
             : settings.amount || Math.round(innerHeight / 2);
 
         if (!!this.boundary) {
-
             this.el = document.createElement('div');
             this.img = document.createElement('img');
             this.img.src = src || settings.image || bg;
@@ -74,7 +71,6 @@ class ParallaxBackground extends Parallax {
     }
 
     update() {
-
         if (this.margin !== this.pmargin) {
             let currentMinHeight = parseInt(this.css.minHeight),
                 potentialMinHeight = this.wrap.offsetHeight + this.margin;
@@ -99,7 +95,6 @@ class ParallaxBackground extends Parallax {
 }
 
 export default (options = {}) => {
-
     const settings = Parallax.settings(options, '[data-parallax-background],[data-parallax-bg]');
 
     for (let i = 0; i < settings.el.length; ++i) {

@@ -23,20 +23,21 @@
     "clean": "rm -rf dist",
     "lint": "eslint -c .eslintrc.json src/** --fix",
     "dev": "npm run clean && rollup --config rollup.config.dev.js --environment NODE_ENV:development --watch",
-    "build": "npm run lint && npm run clean && npm run prod && npm run min",
+    "build": "npm run lint && npm run clean && npm run prod",
     "prod": "rollup --config rollup.config.prod.js --environment NODE_ENV:production",
-    "min": "rollup --config rollup.config.min.js --environment NODE_ENV:production",
     "prepublishOnly": "npm run build",
     "precommit": "npm run lint"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta",
-    "@babel/preset-env": "^7.0.0-beta",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "babel-eslint": "^10.0.1",
+    "core-js": "^3.1.2",
     "eslint": "^5.9.0",
-    "eslint-plugin-html": "^5.0.0",
-    "rollup": "^0.67.4",
-    "rollup-plugin-babel": "^4.0.0-beta.4",
-    "rollup-plugin-terser": "^3.0.0"
+    "rollup": "^1.12.3",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.0",
+    "rollup-plugin-terser": "^5.0.0"
   }
 }

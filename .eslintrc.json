@@ -12,17 +12,7 @@
         "node": true,
         "es6": true
     },
-    "settings": {
-        "html/html-extensions": [
-            ".html",
-            ".svlt"
-        ]
-    },
-    "plugins": [
-        "html"
-    ],
     "rules": {
-        "html/indent": "+4",
         "complexity": [1, {"max": 10}],
         "curly": 1,
         "no-else-return": 1,
@@ -31,7 +21,7 @@
         "no-multi-spaces": 1,
         "no-unmodified-loop-condition": 1,
         "no-useless-escape": 1,
-        "array-bracket-spacing": 1,
+        "array-bracket-spacing":  [1, "always"],
         "brace-style": [1, "1tbs"],
         "camelcase": 1,
         "comma-dangle": 1,

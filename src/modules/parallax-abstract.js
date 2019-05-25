@@ -1,6 +1,5 @@
 
 export default class Parallax {
-
     constructor() {
         this.compensate = false;
         this.include = innerHeight;
@@ -9,7 +8,6 @@ export default class Parallax {
     }
 
     static settings(options, defaultSelector) {
-
         const dom = query => document.querySelectorAll(query);
 
         switch (typeof options.el) {
@@ -31,7 +29,7 @@ export default class Parallax {
         }
 
         if (!Array.isArray(options.el)) {
-            options.el = [options.el];
+            options.el = [ options.el ];
         }
 
         return options;
@@ -77,7 +75,6 @@ export default class Parallax {
     }
 
     measure() {
-
         let scrolled = this.compensate
             ? (this.wtop / this.wheight)
             : (this.wtop + (this.wheight / 2) - this.origin()) / (this.height + this.wheight);

@@ -1,7 +1,6 @@
 import Parallax from './parallax-abstract';
 
 class ParallaxForeground extends Parallax {
-
     constructor(el, settings) {
         super();
         this.el = el;
@@ -9,7 +8,6 @@ class ParallaxForeground extends Parallax {
     }
 
     init(settings) {
-
         if (this.reduceMotion) {
             return;
         }
@@ -46,7 +44,6 @@ class ParallaxForeground extends Parallax {
 }
 
 export default (options = {}) => {
-
     const settings = Parallax.settings(options, '[data-parallax]');
 
     for (let i = 0; i < settings.el.length; ++i) {

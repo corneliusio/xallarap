@@ -1,7 +1,9 @@
 import foreground from './modules/parallax-foreground';
 import background from './modules/parallax-background';
 
-export default (options = {}) => {
+function xallarap(options = {}) {
     foreground(options.foreground);
     background(options.background);
-};
+}
+
+export { foreground, background, xallarap };
