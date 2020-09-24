@@ -1,6 +1,5 @@
 
 export default class Parallax {
-
     constructor() {
         this.compensate = false;
         this.include = innerHeight;
@@ -9,7 +8,6 @@ export default class Parallax {
     }
 
     static settings(options, defaultSelector) {
-
         const dom = query => document.querySelectorAll(query);
 
         switch (typeof options.el) {
@@ -74,15 +72,14 @@ export default class Parallax {
         this.top = this.el.getBoundingClientRect().top + this.wtop;
         this.height = this.el.offsetHeight;
         this.bottom = this.top + this.height;
+        this.middle = this.top + (this.height / 2);
     }
 
     measure() {
-
         let scrolled = this.compensate
             ? (this.wtop / this.wheight)
             : (this.wtop + (this.wheight / 2) - this.origin()) / (this.height + this.wheight);
 
-        this.middle = this.top + (this.height / 2);
         this.margin = (this.boundary < 0)
             ? Math.abs(this.boundary)
             : Math.round(this.boundary * (1 - this.height / this.wheight));
@@ -90,7 +87,7 @@ export default class Parallax {
         this.parallax = parseFloat((this.boundary * scrolled).toFixed(1));
 
         if (this.css.setProperty) {
-            this.css.setProperty('--parallax-control', parseFloat(scrolled).toFixed(2));
+            this.css.setProperty('--parallax-control', parseFloat(scrolled).toFixed(4));
         }
     }
 
