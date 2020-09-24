@@ -118,7 +118,7 @@ class ParallaxForeground extends Parallax {
   update() {
     if (this.parallax !== this.pparallax) {
       this.pparallax = this.parallax;
-      this.hack ? this.css.transform = `translate3d(0,${this.parallax}px,0)` : this.css.transform = `translateY(${this.parallax}px)`;
+      this.hack ? this.css.transform = "translate3d(0,".concat(this.parallax, "px,0)") : this.css.transform = "translateY(".concat(this.parallax, "px)");
     }
   }
 
@@ -193,7 +193,7 @@ class ParallaxBackground extends Parallax {
 
     if (this.reduceMotion) {
       if (bg === 'none') {
-        this.wrap.style.backgroundImage = `url(${src})`;
+        this.wrap.style.backgroundImage = "url(".concat(src, ")");
       }
 
       return;
@@ -206,7 +206,7 @@ class ParallaxBackground extends Parallax {
       this.img = document.createElement('img');
       this.img.src = src || settings.image || bg;
       this.css = this.el.style;
-      this.css.backgroundImage = `url(${this.img.src})`;
+      this.css.backgroundImage = "url(".concat(this.img.src, ")");
       this.css.position = this.img.style.position = 'absolute';
       this.css.top = this.css.left = this.css.right = this.css.bottom = 0;
       this.css.zIndex = -1;
@@ -244,7 +244,7 @@ class ParallaxBackground extends Parallax {
           potentialMinHeight = this.wrap.offsetHeight + this.margin;
 
       if (isNaN(currentMinHeight) || Math.abs(currentMinHeight - potentialMinHeight) > 5) {
-        this.css.minHeight = `${potentialMinHeight}px`;
+        this.css.minHeight = "".concat(potentialMinHeight, "px");
       }
 
       this.pmargin = this.margin;
@@ -253,7 +253,7 @@ class ParallaxBackground extends Parallax {
     if (this.parallax !== this.pparallax) {
       var p = parseFloat((this.parallax - this.margin / 2).toFixed(1));
       this.pparallax = this.parallax;
-      this.hack ? this.css.transform = `translate3d(0,${p}px,0)` : this.css.transform = `translateY(${p}px)`;
+      this.hack ? this.css.transform = "translate3d(0,".concat(p, "px,0)") : this.css.transform = "translateY(".concat(p, "px)");
     }
   }
 
@@ -275,4 +275,4 @@ var index_es = (function () {
 });
 
 export default index_es;
-export { foreground, background };
+export { background, foreground };

@@ -10,9 +10,9 @@ module.exports = {
         babel({
             babelrc: false,
             presets: [
-                ['@babel/env', {
+                [ '@babel/env', {
                     modules: false
-                }]
+                } ]
             ]
         })
     ]
