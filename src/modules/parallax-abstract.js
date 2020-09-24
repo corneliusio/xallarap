@@ -29,7 +29,7 @@ export default class Parallax {
         }
 
         if (!Array.isArray(options.el)) {
-            options.el = [options.el];
+            options.el = [ options.el ];
         }
 
         return options;
